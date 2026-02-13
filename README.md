@@ -51,6 +51,14 @@ python main.py
 
 ---
 
+## Database
+
+The project includes a `cafes.db` file with dummy sample data for testing purposes.
+
+Make sure to keep the folder structure unchanged, otherwise the database connection or template rendering may not work properly.
+
+---
+
 ## API Routes
 
 GET /random  
