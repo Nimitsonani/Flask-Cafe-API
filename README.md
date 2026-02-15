@@ -1,28 +1,91 @@
 # Flask Cafe API
 
-A RESTful API built using Flask and SQLAlchemy that allows users to view, add, update, and delete cafe data.
+This is a RESTful API built with Flask and SQLAlchemy.
+
+It exposes endpoints to perform CRUD operations on a café database.  
+The project focuses on building structured API routes, handling HTTP methods properly, and interacting with a relational database using an ORM.
 
 ---
 
-## Project Overview
+## What This Project Does
 
-- Cafe API is a RESTful web project built using Flask and a SQLite database.
-- This application allows users to perform CRUD operations.
-- Users can create new cafe entries in the database.
-- Users can delete existing cafe data from the database.
-- Users can update existing cafe prices in the database.
-- Users can search cafes by location.
+The API allows clients to:
+
+- Retrieve café data
+- Search cafés by location
+- Add new cafés
+- Update café pricing
+- Delete cafés (API key protected)
+
+All data is stored in a SQLite database using SQLAlchemy models.
+
+The goal of this project was to build a clean REST-style backend with proper route design and database interaction.
 
 ---
 
-## Features
+## How It Works
 
-- Get a random cafe
-- Get all cafes
-- Search cafe by location
-- Add a new cafe
-- Update cafe price
-- Delete cafe (API key protected)
+- Each café is stored as a row in the `cafes.db` SQLite database.
+- SQLAlchemy handles database operations through ORM models.
+- Different HTTP methods are used for different operations:
+  - `GET` → Retrieve data
+  - `POST` → Create new data
+  - `PATCH` → Update existing data
+  - `DELETE` → Remove data
+
+The delete endpoint requires an API key as a simple protection mechanism.
+
+---
+
+## Available Routes
+
+### Retrieve Data
+
+- `GET /random` → Returns a random café  
+- `GET /all` → Returns all cafés  
+- `GET /search?loc=location_name` → Search cafés by location  
+
+### Modify Data
+
+- `POST /add` → Add a new café  
+- `PATCH /update_price/<id>?new_price=price` → Update café price  
+- `DELETE /report_closed/<id>?api_key=topsecretkey` → Delete café  
+
+---
+
+## Example Requests
+
+Get all cafés:
+
+```
+http://127.0.0.1:5000/all
+```
+
+Get a random café:
+
+```
+http://127.0.0.1:5000/random
+```
+
+Search by location:
+
+```
+http://127.0.0.1:5000/search?loc=London
+```
+
+Update price:
+
+```
+http://127.0.0.1:5000/update_price/1?new_price=£4.00
+```
+
+Delete café:
+
+```
+http://127.0.0.1:5000/report_closed/1?api_key=topsecretkey
+```
+
+The `/add` route should be tested using Postman or another API client with the `POST` method and form data.
 
 ---
 
@@ -35,77 +98,31 @@ A RESTful API built using Flask and SQLAlchemy that allows users to view, add, u
 
 ---
 
-## Installation
+## Database
 
-Install dependencies:
+The repository includes a `cafes.db` file with sample data for testing.
 
-```bash
+The database is connected through SQLAlchemy ORM.  
+Folder structure should remain unchanged so the database path resolves correctly.
+
+---
+
+## Running Locally
+
+1. Install dependencies:
+
+```
 pip install -r requirements.txt
 ```
 
-Run the application:
+2. Run the application:
 
-```bash
+```
 python main.py
 ```
 
----
+The server will start on:
 
-## Database
-
-The project includes a `cafes.db` file with dummy sample data for testing purposes.
-
-Make sure to keep the folder structure unchanged, otherwise the database connection or template rendering may not work properly.
-
----
-
-## API Routes
-
-GET /random  
-GET /all  
-GET /search?loc=location_name  
-POST /add  
-GET or PATCH /update_price/<id>?new_price=price  
-GET or DELETE /report_closed/<id>?api_key=topsecretkey  
-
----
-
-## Quickstart
-
-Hit the below URLs in your browser after starting the server.
-
-### Get All Cafes (GET)
-
-```bash
-http://127.0.0.1:5000/all
 ```
-
-### Get Random Cafe (GET)
-
-```bash
-http://127.0.0.1:5000/random
+http://127.0.0.1:5000
 ```
-
-### Search Cafe by Location (GET)
-
-```bash
-http://127.0.0.1:5000/search?loc=London
-```
-
-### Update Cafe Price (GET)
-
-```bash
-http://127.0.0.1:5000/update_price/1?new_price=£4.00
-```
-
-### Delete Cafe (GET)
-
-```bash
-http://127.0.0.1:5000/report_closed/1?api_key=topsecretkey
-```
-
----
-
-### Note
-
-The `/add` route must be tested using Postman or another API testing tool using the POST method with form data.
