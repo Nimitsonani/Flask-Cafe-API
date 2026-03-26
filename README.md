@@ -1,5 +1,8 @@
 # Flask Cafe API
 
+🔗 **Live Demo:** https://nimit.pythonanywhere.com
+
+
 This is a RESTful API built with Flask and SQLAlchemy.
 
 It exposes endpoints to perform CRUD operations on a café database.  
